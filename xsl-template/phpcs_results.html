@@ -1,0 +1,58 @@
+<html>
+<head>
+	<!--
+	Source: http://www.w3schools.com/xsl/xsl_client.asp
+
+	Auto-generate output from xslt and xml for PHPCS checkstyle logfile.
+	@see https://gist.github.com/jrfnl/3c28ea6d9b07fd48656d
+
+	Make sure you point the file to your .xml logfile in the displayResult() function!
+	-->
+	<title>PHPCS test results</title>
+
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+
+	<script type="text/javascript">
+	function loadXMLDoc( filename ) {
+		if (window.ActiveXObject) {
+			xhttp = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		else {
+			xhttp = new XMLHttpRequest();
+		}
+		xhttp.open("GET", filename, false);
+		try {xhttp.responseType = "msxml-document"} catch(err) {} // Helping IE11
+		xhttp.send("");
+		return xhttp.responseXML;
+	}
+	
+	function displayResult() {
+		/**
+		 * @todo Change the file name here to point to your logfile location
+		 */
+		var date = new Date().getTime();
+		var xml  = loadXMLDoc("phpcs-checkstyle.xml?v="+date);
+		var xsl  = loadXMLDoc("phpcs-noframes-severity-sorted.xsl");
+
+		// code for IE
+		if (window.ActiveXObject || xhttp.responseType == "msxml-document") {
+			var ex = xml.transformNode(xsl);
+			document.getElementById("example").innerHTML = ex;
+		}
+		// code for Chrome, Firefox, Opera, etc.
+		else if (document.implementation && document.implementation.createDocument) {
+			var xsltProcessor = new XSLTProcessor();
+			xsltProcessor.importStylesheet(xsl);
+			var resultDocument = xsltProcessor.transformToFragment(xml, document);
+			document.getElementById("example").appendChild(resultDocument);
+		}
+	}
+	</script>
+</head>
+<body onload="displayResult()">
+	<div id="example">
+	</div>
+</body>
+</html>

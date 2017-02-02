@@ -1,2 +1,3 @@
 # folders and files to be ignored by git
 xsl-template/phpcs-checkstyle.xml
+logs/*

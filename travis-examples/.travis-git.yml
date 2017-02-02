@@ -1,0 +1,63 @@
+# Travis CI (MIT License) configuration file
+# @link https://travis-ci.org/
+
+# Use new container based environment
+sudo: false
+
+# Declare project language.
+# @link http://about.travis-ci.org/docs/user/languages/php/
+language: php
+
+# Declare versions of PHP to use. Use one decimal max.
+# @link http://docs.travis-ci.com/user/build-configuration/
+matrix:
+    fast_finish: true
+
+    include:
+        # aliased to a recent 5.3.x version
+        - php: '5.3'
+        # aliased to a recent 5.4.x version
+        - php: '5.4'
+        # aliased to a recent 5.5.x version
+        - php: '5.5'
+        # aliased to a recent 5.6.x version
+        - php: '5.6'
+          env: SNIFF=1
+        # aliased to a recent 7.x version
+        - php: '7.0'
+        # aliased to a recent 7.x version
+        - php: '7.1'
+        # aliased to a recent hhvm version
+        - php: 'hhvm'
+        # php nightly
+        - php: 'nightly'
+
+    allow_failures:
+        - php: 'hhvm'
+        - php: nightly
+
+before_install:
+  - if [[ "$SNIFF" == "1" ]]; then export PHPCS_DIR=/tmp/phpcs; fi
+  - if [[ "$SNIFF" == "1" ]]; then export STNDS_DIR=/tmp/standards; fi
+  # Install PHP CodeSniffer.
+  - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR; fi
+  # Install PHP Compatibility Standard.
+  - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/wimg/PHPCompatibility.git $STNDS_DIR/phpcompatibility; fi
+  # Hop into CodeSniffer directory.
+  - if [[ "$SNIFF" == "1" ]]; then cd $PHPCS_DIR; fi
+  # Set install path for PHP Compatibility Standard.
+  # @link https://github.com/squizlabs/PHP_CodeSniffer/blob/4237c2fc98cc838730b76ee9cee316f99286a2a7/CodeSniffer.php#L1941
+  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/scripts/phpcs --config-set installed_paths $STNDS_DIR; fi
+  # Hop back into project dir.
+  - if [[ "$SNIFF" == "1" ]]; then cd $TRAVIS_BUILD_DIR; fi
+  # After CodeSniffer install you should refresh your path.
+  - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
+
+
+# Run test script commands.
+# All commands must exit with code 0 on success. Anything else is considered failure.
+script:
+  # Search for PHP syntax errors.
+  - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+  # Run PHPCS.
+  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/scripts/phpcs . --standard=./custom-ruleset.xml; fi

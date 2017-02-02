@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<ruleset name="MyProject">
+	<description>Coding Standard for MyProject.</description>
+	
+	<arg value="ps" />
+	<arg name="report" value="summary" />
+	<arg name="extensions" value="php,inc,js,css,lib/php" />
+	<ini name="memory_limit" value="128M" />
+
+</ruleset>

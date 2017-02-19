@@ -10,4 +10,4 @@ In this repo you'll find:
 
 Recommended reading:
 * [PHPCS wiki](https://github.com/squizlabs/PHP_CodeSniffer/wiki/)
-* [PHPCS customizable properties list](https://gist.github.com/jrfnl/ff1555af507a03f3df00462b94d029ab)
+* [PHPCS customizable properties list](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties)

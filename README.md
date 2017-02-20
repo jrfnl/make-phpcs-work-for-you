@@ -2,6 +2,8 @@
 
 Demo code used in my "Don't work for PHPCS, make PHPCS work for you" talk.
 
+The slides from the talk are available on [speakerdeck](https://speakerdeck.com/jrf/dont-work-for-phpcs-make-phpcs-work-for-you).
+
 In this repo you'll find:
 * Example code for a Travis setup to automatically run PHP Codesniffer against your repository.
 * Information on how to set up logging.

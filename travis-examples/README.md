@@ -13,6 +13,15 @@ It is therefore good practice to only run PHPCS once per build against a relativ
 
 Both examples have this mechanism build in.
 
+### Don't ignore warnings
+
+I often see people by default ignoring warnings thrown by PHPCS by setting the `-n` flag on the command line or in a custom ruleset, just to prevent their QA builds failing on these.
+
+This is not a good idea. Adding the flag to a custom ruleset is an especially bad idea, as that way developers won't see warnings in their own runs/IDE either.
+
+Much better is to use `--runtime-set ignore_warnings_on_exit 1` in the PHPCS command and only for the Travis script.
+This setting will allow warnings to be reported, but it won't fail the build on it.
+
 
 ### Linting your code
 

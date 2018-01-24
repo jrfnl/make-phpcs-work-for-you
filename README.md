@@ -14,4 +14,5 @@ In this repo you'll find:
 
 Recommended reading:
 * [PHPCS wiki](https://github.com/squizlabs/PHP_CodeSniffer/wiki/)
+* [PHPCS advanced usage](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Advanced-Usage)
 * [PHPCS customizable properties list](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Customisable-Sniff-Properties)

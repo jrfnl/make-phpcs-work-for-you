@@ -3,6 +3,9 @@
 Demo code used in my "Don't work for PHPCS, make PHPCS work for you" talk.
 
 The slides from the talk are available on speakerdeck:
+* [PHPKonf version](https://speakerdeck.com/jrf/dont-work-for-phpcs-make-phpcs-work-for-you-4) - May 2018.
+* [BulgariaPHP version](https://speakerdeck.com/jrf/dont-work-for-phpcs-make-phpcs-work-for-you-3) - April 2018.
+* [PHP Benelux version](https://speakerdeck.com/jrf/dont-work-for-phpcs-make-phpcs-work-for-you-2) - January 2018.
 * [PHP Southcoast version](https://speakerdeck.com/jrf/dont-work-for-phpcs-make-phpcs-work-for-you-1) - June 2017.
 * [SunshinePHP version](https://speakerdeck.com/jrf/dont-work-for-phpcs-make-phpcs-work-for-you) - February 2017.
 
